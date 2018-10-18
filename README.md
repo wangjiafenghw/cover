@@ -1,7 +1,7 @@
 # cover
 > efficient,silent,multiterminal conversion framework for front-end.
 >
-> 前端高效的、悄无声息的、多端输出框架。
+> 前端高效的、悄无声息的的多端输出框架。
 
 ## 简介
 该框架可以载入某种平台或环境的web程序（如：H5,微信小程序，react-native等）代码，就可以输出符合其他平台或环境运行的代码。
