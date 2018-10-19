@@ -12,11 +12,11 @@
 机器码好比人类的DNA，各个平台的前端代码好比一个成年人，而cover框架好比人胚胎的胚胎的状态，每个人的胚胎状态不仅具有一直的形态,还可以根据基因成长为不同的形态。
 >### cover工作流程图
 
-![cover工作流程图](http://on-img.com/chart_image/5bc86082e4b0bd4db96a728f.png)
+[![cover工作流程图](http://on-img.com/chart_image/5bc86082e4b0bd4db96a728f.png)](https://www.processon.com/view/link/5bc86082e4b09b21f323bc8a)
 
 >### cover输出端工作流程
 
-![cover输出端工作流程](http://on-img.com/chart_image/5bc9225be4b0bd4db96af224.png)
+[![cover输出端工作流程](http://on-img.com/chart_image/5bc9225be4b0bd4db96af224.png)](https://www.processon.com/view/link/5bc92b87e4b0bd4db96af76d)
 
 ## cover规范定义
 
