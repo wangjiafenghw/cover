@@ -17,7 +17,35 @@
 >### cover输出端工作流程
 
 [![cover输出端工作流程](http://on-img.com/chart_image/5bc9225be4b0bd4db96af224.png)](https://www.processon.com/view/link/5bc92b87e4b0bd4db96af76d)
+<<<<<<< HEAD
 
+## cover内部逻辑
+> 简介
+
+cover既然作为能将多种终端的前端代码抽象出来，那么毕竟既有高度的概括性、明确性、简洁性和一致性。这里采用mvp设计模式，将dom树抽离存入View-html中，将计算后的样式View-style中。
+```
+<!-- html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Web</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <h1>Hello World</h1>
+</body>
+</html>
+```
+经过cover入端处理模块=======>
+```
+
+```
+
+
+=======
+>>>>>>> 7b137ff70a147e01497914569d66d44d8b9f5801
 
 
 
