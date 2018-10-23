@@ -17,7 +17,6 @@
 >### cover输出端工作流程
 
 [![cover输出端工作流程](http://on-img.com/chart_image/5bc9225be4b0bd4db96af224.png)](https://www.processon.com/view/link/5bc92b87e4b0bd4db96af76d)
-<<<<<<< HEAD
 
 ## cover内部逻辑
 > 简介
@@ -42,11 +41,4 @@ cover既然作为能将多种终端的前端代码抽象出来，那么毕竟既
 ```
 
 ```
-
-
-=======
->>>>>>> 7b137ff70a147e01497914569d66d44d8b9f5801
-
-
-
 
