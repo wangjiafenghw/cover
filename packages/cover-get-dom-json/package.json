@@ -1,0 +1,18 @@
+{
+  "name": "cover-get-dom-json",
+  "version": "0.0.4",
+  "description": "获取dom树的js格式,可用于cover-html也可以单独使用",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": {
+    "name": "Wang Jiafeng",
+    "email": "wang_jiafeng@yahoo.com",
+    "url": "yellowfox.cn"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "himalaya": "^1.1.0"
+  }
+}
