@@ -39,6 +39,78 @@ cover既然作为能将多种终端的前端代码抽象出来，那么毕竟既
 ```
 经过cover入端处理模块=======>
 ```
-
+[{
+	"type": "element",
+	"tagName": "!doctype",
+	"attributes": [{
+		"key": "html",
+		"value": null
+	}],
+	"children": []
+}, {
+	"type": "element",
+	"tagName": "html",
+	"attributes": [{
+		"key": "lang",
+		"value": "en"
+	}],
+	"children": [{
+		"type": "element",
+		"tagName": "head",
+		"attributes": [],
+		"children": [{
+			"type": "element",
+			"tagName": "meta",
+			"attributes": [{
+				"key": "charset",
+				"value": "UTF-8"
+			}],
+			"children": []
+		}, {
+			"type": "element",
+			"tagName": "meta",
+			"attributes": [{
+				"key": "name",
+				"value": "viewport"
+			}, {
+				"key": "content",
+				"value": "width=device-width, initial-scale=1.0"
+			}],
+			"children": []
+		}, {
+			"type": "element",
+			"tagName": "meta",
+			"attributes": [{
+				"key": "http-equiv",
+				"value": "X-UA-Compatible"
+			}, {
+				"key": "content",
+				"value": "ie=edge"
+			}],
+			"children": []
+		}, {
+			"type": "element",
+			"tagName": "title",
+			"attributes": [],
+			"children": [{
+				"type": "text",
+				"content": "Document"
+			}]
+		}]
+	}, {
+		"type": "element",
+		"tagName": "body",
+		"attributes": [],
+		"children": [{
+			"type": "element",
+			"tagName": "h1",
+			"attributes": [],
+			"children": [{
+				"type": "text",
+				"content": "Hello World"
+			}]
+		}]
+	}]
+}]
 ```
 

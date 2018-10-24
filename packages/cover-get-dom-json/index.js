@@ -17,8 +17,7 @@ let htmlStr = `
 </html>
 `;
 let json = himalaya.parse(htmlStr)
-console.log(json[3].children[3])   //下一步去除无效对象属性
-
+console.log(json)   //下一步去除无效对象属性
 
 
 
