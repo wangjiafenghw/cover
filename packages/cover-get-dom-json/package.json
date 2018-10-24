@@ -1,11 +1,20 @@
 {
   "name": "cover-get-dom-json",
-  "version": "0.0.4",
+  "version": "1.0.5",
   "description": "获取dom树的js格式,可用于cover-html也可以单独使用",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [
+    "cover",
+    "himalaya",
+    "transition",
+    "dom",
+    "tree",
+    "json",
+    "html"
+  ],
   "author": {
     "name": "Wang Jiafeng",
     "email": "wang_jiafeng@yahoo.com",
