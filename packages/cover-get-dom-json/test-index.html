@@ -28,40 +28,24 @@
         let str = htmlStr.replace(/ *[\r|\n] */gm, '');   //去除es6模板字符串所存在的换行和空格
         let json = window.himalaya.parse(str)
 
+
         //遍历json
-        function _re_get_node(json, _tagName = "body") {
+        //参数 domTree, 选择的标签名，回调
+        function _re_get_node(json, _tagName, callback) {
             for (i in json) {
                 if (json[i].tagName === _tagName) {
-                    let _b = deepCopy(json[i].children);
-                    return _b;
+                    callback(json[i])
                 }
                 if (json[i].hasOwnProperty('children') && json[i].children.length > 0) {
-                    return _re_get_node(json[i].children, _tagName)
+                    _re_get_node(json[i].children, _tagName, callback)
                 }
             }
         }
-        console.log(_re_get_node(json))
-        //深拷贝
-        function deepCopy(o) {
-            if (o instanceof Array) {
-                var n = [];
-                for (var i = 0; i < o.length; ++i) {
-                    n[i] = deepCopy(o[i]);
-                }
-                return n;
-            } else if (o instanceof Function) {
-                var n = new Function("return " + o.toString())();
-                return n
-            } else if (o instanceof Object) {
-                var n = {}
-                for (var i in o) {
-                    n[i] = deepCopy(o[i]);
-                }
-                return n;
-            } else {
-                return o;
-            }
-        }
+        
+        _re_get_node(json, "body", (node)=>{
+            console.log(node)
+        })
+    
         
 
     </script>
