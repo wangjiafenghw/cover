@@ -1,0 +1,27 @@
+{
+  "name": "cover-get-dom-node-by-tagname",
+  "version": "1.0.1",
+  "description": "通过标签名获取html字符串的某个标签节点",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cover",
+    "tagName",
+    "transition",
+    "dom",
+    "tree",
+    "json",
+    "html"
+  ],
+  "author": {
+    "name": "Wang Jiafeng",
+    "email": "wang_jiafeng@yahoo.com",
+    "url": "https://yellowfox.cn/"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "cover-get-dom-json": "^1.0.5"
+  }
+}
