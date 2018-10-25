@@ -1,5 +1,7 @@
 # install
 npm install cover-get-dom-json
+> 输入html字符串输出json对象
+字符串可以有空格和换行，模块自动忽略
 
 
 # 鸣谢
