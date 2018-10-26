@@ -1,5 +1,7 @@
 # install
 npm install cover-get-dom-json
+[![npm](https://img.shields.io/badge/npm-v1.0.5-green.svg)](https://www.npmjs.com/package/cover-get-dom-json)
+
 > 输入html字符串输出json对象
 字符串可以有空格和换行，模块自动忽略
 
