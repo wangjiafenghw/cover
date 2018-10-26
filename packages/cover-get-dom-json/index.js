@@ -4,7 +4,10 @@ const himalaya = require("himalaya")
 module.exports = getDomJson
 
 
-//*html(5)  ---->   jsonDomTree  ---X-->  cover-html*/
+/**
+ * 
+ * TODO html(5)----->DomTreeJson--X-->cover-html
+ */
 function getDomJson(htmlStr){
     let str = htmlStr.replace(/ *[\r|\n] */gm, '');   //去除es6模板字符串所存在的换行和空格
     let json = himalaya.parse(str)
