@@ -1,0 +1,20 @@
+{
+  "name": "wx-get-wxml",
+  "version": "0.0.1",
+  "description": "由cover-html输出wxml",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cover",
+    "wxml",
+    "wx-app"
+  ],
+  "author": {
+    "name": "Wang Jiafeng",
+    "email": "wang_jiafeng@yahoo.com",
+    "url": "https://yellowfox.cn/"
+  },
+  "license": "MIT"
+}
