@@ -14,25 +14,44 @@ let htmlStr = `
     <title>Document</title>
 </head>
 <body>
-    <h1>Hello World</h1>
+    <div>
+        <p>Hello</p>
+        <p>cover.js</p>
+        <div>
+            <p>Hello</p>
+            <p>cover.js</p>
+        </div>
+    </div>
+    <div>
+        <p>Hello</p>
+        <p>cover.js</p>
+    </div>
 </body>
 </html>
 `;
 
+String.prototype.replaceAll = function(s1,s2){
+　　return this.replace(new RegExp(s1,"gm"),s2);
+}
 /**
  * * 用递归深度优先遍历能不能行，试试再说，用replaceMrak占位替换的方式
  * TODO 获取wxml标准的字符串
  * @param {json} body标签内的dom树json 
  */
 function _re_json_get_str(json) {
-    json.forEach(item => {
+    json.forEach((item, index) => {
         if(item.type==="element"){
-            let str = `<${wx_tag[item.tagName].tagName}>${replaceMark}</${wx_tag[item.tagName].tagName}>`  //获取wxml相应标签，mark占位
+            let str = `<${wx_tag[item.tagName].tagName}>${replaceMark}</${wx_tag[item.tagName].tagName}>${replaceMark}`  //获取wxml相应标签，mark占位
             wxHtml = wxHtml.replace(replaceMark, str)
             _re_json_get_str(item.children)
+            if(index===json.length-1){    //不再有兄弟节点，去除replaceMark
+                wxHtml = wxHtml.replace(replaceMark, "")
+            }
         }else if(item.type==="text"){
             wxHtml = wxHtml.replace(replaceMark, item.content)
         }
+        
+        
     });
 }
 async function _get_wxml(body_json){

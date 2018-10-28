@@ -1,4 +1,7 @@
-module.exports = { //微信小程序和html5标签对比obj
+/**
+ * * 微信小程序wxml标签和html5对照obj
+ */
+module.exports = { 
     'div': {
         tagName: "view"
     },

@@ -117,3 +117,44 @@ cover既然作为能将多种终端的前端代码抽象出来，那么毕竟既
 }]
 ```
 
+```
+// 经过cover输出端处理模块输出wxml(wx-get-wxml)=======>
+<!-- 输入样例 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <p>Hello</p>
+        <p>cover.js</p>
+        <div>
+            <p>Hello</p>
+            <p>cover.js</p>
+        </div>
+    </div>
+    <div>
+        <p>Hello</p>
+        <p>cover.js</p>
+    </div>
+</body>
+</html>
+<!-- 输出样例 -->
+<view>
+	<text>Hello</text>
+	<text>cover.js</text>
+	<view>
+		<text>Hello</text>
+		<text>cover.js</text>
+	</view>
+</view>
+<view>
+	<text>Hello</text>
+	<text>cover.js</text>
+</view>
+```
+
