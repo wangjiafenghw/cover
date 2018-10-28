@@ -16,5 +16,8 @@
     "email": "wang_jiafeng@yahoo.com",
     "url": "https://yellowfox.cn/"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "cover-get-dom-node-by-tagname": "^1.0.1"
+  }
 }
