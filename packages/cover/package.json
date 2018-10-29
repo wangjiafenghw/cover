@@ -1,0 +1,22 @@
+{
+  "name": "cover-generator",
+  "version": "0.0.1",
+  "description": "cover框架",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cover",
+    "wxml",
+    "wx-app",
+    "hybrid",
+    "h5"
+  ],
+  "author": {
+    "name": "Wang Jiafeng",
+    "email": "wang_jiafeng@yahoo.com",
+    "url": "https://yellowfox.cn/"
+  },
+  "license": "MIT"
+}
