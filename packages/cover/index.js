@@ -1,5 +1,2 @@
-module.exports = main
+var app = exports = module.exports = {};
 
-function main(){
-    console.log('coding...')
-}
