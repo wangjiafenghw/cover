@@ -3,36 +3,7 @@ const replaceMark = '@^cover^';
 let wxHtml = replaceMark; //特殊字符串用于替换，并尽量避免与源内容冲突
 const wx_tag = require("./wx_tag.config")
 
-//test data
-let htmlStr = `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <div>
-        <p>Hello</p>
-        <p>cover.js</p>
-        <div>
-            <p>Hello</p>
-            <p>cover.js</p>
-        </div>
-    </div>
-    <div>
-        <p>Hello</p>
-        <p>cover.js</p>
-    </div>
-</body>
-</html>
-`;
-
-String.prototype.replaceAll = function(s1,s2){
-　　return this.replace(new RegExp(s1,"gm"),s2);
-}
+module.exports = main
 /**
  * * 用递归深度优先遍历能不能行，试试再说，用replaceMrak占位替换的方式
  * TODO 获取wxml标准的字符串
@@ -59,10 +30,9 @@ async function _get_wxml(body_json){
     return;
 }
 
-function main(str) {
+function main(str, callback) {
     cgdnbt(str, "body", (body_json)=>{
         _get_wxml(body_json.children)
-        console.log(wxHtml)
+        callback(wxHtml)
     })
 }
-main(htmlStr)
