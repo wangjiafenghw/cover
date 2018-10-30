@@ -1,14 +1,7 @@
-#! /usr/bin/env node
+
 
 const program = require("commander")
-const chalk = require('chalk');
-const inquirer = require('inquirer');
-const ora = require('ora');
-const path = require('path')
-let rootName = path.basename(process.cwd())  // * 默认项目名为根目录
-const app = require('fun')
-
-const c_opt = {}; // * 建立项目用户交互结果对象
+const app = require("./fun")
 
 module.exports = program
 

@@ -7,8 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "cover-cli": "command.js",
-    "cover-generator": "command.js"
+    "cover-cli": "index.js",
+    "cover-generator": "index.js"
   },
   "keywords": [
     "cover",
@@ -26,6 +26,7 @@
   "dependencies": {
     "chalk": "^2.4.1",
     "commander": "^2.19.0",
+    "fs-extra": "^7.0.0",
     "inquirer": "^6.2.0",
     "ora": "^3.0.0"
   }
