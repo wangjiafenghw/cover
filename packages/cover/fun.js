@@ -1,11 +1,11 @@
 const fs = require('fs-extra')
-const chalk = require('chalk');
 const inquirer = require('inquirer');
 const ora = require('ora');
 const path = require('path')
 let rootName = path.basename(process.cwd())  // * 默认项目名为根目录
 const c_operation = {}; // * 建立项目用户交互结果对象
-const spinner = ora('创建工程...');
+const template = require("./template")   // * 工程文件模板内容
+const spinner = ora('创建工程...');  // * loading动画
 
 
 module.exports =  app = {};  // * 命令相应操作方法对象
@@ -45,9 +45,21 @@ app.createfolderfun = {
         })
     },
     'h5': ()=>{   // * 创建h5入端开发模板
-        fs.ensureFile(`./${c_operation.name}/index.html`, (err)=>{
+        fs.outputFile(`./${c_operation.name}/index.html`, template.h5.html,(err)=>{
             if(err) throw err;
         })
+        fs.outputFile(`./${c_operation.name}/style/style.css`, template.h5.style,(err)=>{
+            if(err) throw err;
+        })
+        fs.outputFile(`./${c_operation.name}/js/index.js`, template.h5.script,(err)=>{
+            if(err) throw err;
+        })
+        fs.copy(`${__dirname}/logo.png`, `./${c_operation.name}/images/logo.png`, err => {
+            if(err) throw err;
+        }) 
+        fs.ensureFile(`./${c_operation.name}/build`,(err)=>{
+            if(err) throw err;
+        })         
         app.createfolderfun['*']()
     }
 }
@@ -57,8 +69,10 @@ app.createfolderfun = {
  * todo 根据c_operation渲染项目模板
  */
 app.render = ()=>{
-    c_operation.package = 
-`{
+    spinner.start();
+        // ? package.json
+        c_operation.package = `
+{
     "name": "${c_operation.name}",
     "version": "1.0.0",
     "description": "",
@@ -69,8 +83,7 @@ app.render = ()=>{
     "keywords": [],
     "author": {},
     "license": "MIT"
-}`
-    spinner.start();
+}`,
+    app.createfolderfun[c_operation.input_format]()  // * 入端
 
-    app.createfolderfun[c_operation.input_format]()
 }
