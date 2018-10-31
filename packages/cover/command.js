@@ -24,10 +24,10 @@ program
         app.init(name)
     });
 program
-    .command('exec <cmd>')
-    .description('run the given remote command')
+    .command('build')
+    .description('output project')
     .action(function (cmd) {
-        console.log('exec "%s"', cmd);
+        app.compile()
     });
 
 program

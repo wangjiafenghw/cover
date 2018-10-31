@@ -6,6 +6,10 @@ let rootName = path.basename(process.cwd())  // * 默认项目名为根目录
 const c_operation = {}; // * 建立项目用户交互结果对象
 const template = require("./template")   // * 工程文件模板内容
 const spinner = ora('创建工程...');  // * loading动画
+const wxGetWxml = require('wx-get-wxml');
+
+let cover = {};    //保存cover值
+let config = {};   //配置信息
 
 
 module.exports =  app = {};  // * 命令相应操作方法对象
@@ -26,7 +30,7 @@ app.init = (name)=>{
             inquirer.prompt([{type: 'checkbox', name: 'output_format', message: `输出哪些平台的工程?`, choices: ["h5", "wxapp", "vue", "react"]}])
             .then(answers => {// todo 输出端格式
                 c_operation.output_format = answers.output_format;
-                app.render()  // todo 调用渲染
+                app.begin()  // todo 调用渲染
             });
         });
     });
@@ -36,12 +40,18 @@ app.init = (name)=>{
  * * 根据预设的入端代码结构初始化项目文件结构方法的对象
  */
 app.createfolderfun = {
-    '*': ()=>{  // * 创建package.json
+    '*': ()=>{  
+        // * 创建package.json
         fs.outputFile(`./${c_operation.name}/package.json`, c_operation.package, err => {
             if(err) throw err
             setTimeout(()=>{   // ? 输出太快有点low，这样逼格高一些
                 spinner.succeed()
             }, 2000)
+        })
+        // * 创建cover.config.js
+        let config = {'input_format': c_operation.input_format, 'output_format': c_operation.output_format}
+        fs.outputJson(`./${c_operation.name}/cover.config.js`, config, (err)=>{
+            if(err) throw err;
         })
     },
     'h5': ()=>{   // * 创建h5入端开发模板
@@ -68,7 +78,7 @@ app.createfolderfun = {
 /**
  * todo 根据c_operation渲染项目模板
  */
-app.render = ()=>{
+app.begin = ()=>{
     spinner.start();
         // ? package.json
         c_operation.package = `
@@ -83,7 +93,58 @@ app.render = ()=>{
     "keywords": [],
     "author": {},
     "license": "MIT"
-}`,
+}`;
+
+
     app.createfolderfun[c_operation.input_format]()  // * 入端
 
 }
+
+
+/**
+ * todo 获取wx代码
+ */
+app.getCoverHtml = (strHtml, callback)=>{
+    wxGetWxml(strHtml, (res)=>{
+        callback(res)
+    })
+}
+
+/**
+ * * 编译方法对象
+ */
+app.compile_fun = {
+    'h5':{
+        'wxapp':{
+            html: 'wxGetWxml'
+        },
+        'react':{
+            html: 'reactGetHtml'   // ! demodemo   react vue 都是不需要的， h5\wxapp\hybrid是目前的输出选型
+        }
+    }
+}
+
+/**
+ * @param {callback} 获取config回调
+ */
+app.getConfigJson = (callback)=>{
+    fs.readJson('./cover.config.js', (err, json) => {
+        if (err) console.error(err)
+        config = json   // todo 赋值到全局
+        callback()
+    })
+}
+
+/**
+ * todo "编译", 文件输出
+ */
+app.compile = ()=>{
+    app.getConfigJson(()=>{
+        console.log(app.compile_fun, config)
+        for(let i=0;i<config.output_format.length;i++){
+            console.log(app.compile_fun[config.input_format][config.output_format[i]]['html'])  // ! demodemodemo
+        }
+    })
+    
+}
+
