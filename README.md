@@ -1,5 +1,7 @@
+![logo](https://raw.githubusercontent.com/wangjiafenghw/cover/master/lib/logo.png)
+[![license](https://img.shields.io/github/license/wangjiafenghw/cover.svg)](https://github.com/wangjiafenghw/cover/blob/master/LICENSE) ![npmV](https://img.shields.io/badge/npm-v1.4.8-green.svg)
+
 # cover
-[![license](https://img.shields.io/github/license/wangjiafenghw/cover.svg)](https://github.com/wangjiafenghw/cover/blob/master/LICENSE)
 > efficient,silent,multiterminal conversion framework for front-end.
 >
 > 前端高效的、悄无声息的的多端输出框架。
