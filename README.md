@@ -1,5 +1,5 @@
 ![logo](https://raw.githubusercontent.com/wangjiafenghw/cover/master/lib/logo.png)
-[![license](https://img.shields.io/github/license/wangjiafenghw/cover.svg)](https://github.com/wangjiafenghw/cover/blob/master/LICENSE) ![npmV](https://img.shields.io/badge/npm-v1.4.8-green.svg)
+[![license](https://img.shields.io/github/license/wangjiafenghw/cover.svg)](https://github.com/wangjiafenghw/cover/blob/master/LICENSE) ![npmV](https://img.shields.io/badge/npm-%3E%3Dv1.4.8-green.svg)
 
 # cover
 > efficient,silent,multiterminal conversion framework for front-end.
