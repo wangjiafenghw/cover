@@ -10,7 +10,9 @@
 建议使用vscode-Better Comments打开代码
 
 > 使用体验[测试]
+
 > npm i cover-generator
+
 > cover-generator init (project-name)
 
 ## 简介
