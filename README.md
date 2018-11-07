@@ -9,6 +9,10 @@
 
 建议使用vscode-Better Comments打开代码
 
+> 使用体验[测试]
+> npm i cover-generator
+> cover-generator init (project-name)
+
 ## 简介
 该框架可以载入某种平台或环境的web程序（如：H5,微信小程序，react-native等）代码，就可以输出符合其他平台或环境运行的代码。
 
