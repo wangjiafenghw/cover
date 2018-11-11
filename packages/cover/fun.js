@@ -13,6 +13,86 @@ let config = {};   //配置信息
 
 
 module.exports =  app = {};  // * 命令相应操作方法对象
+
+/**
+ * * 编译方法对象
+ */
+app.compile_fun = {
+    'h5':{
+        'wxapp':{
+            html: 'wxGetWxml'
+        },
+        'react':{
+            html: 'reactGetHtml'   // ! demodemo   react vue 都是不需要的， h5\wxapp\hybrid是目前的输出选型
+        }
+    }
+}
+
+
+/**
+ * 
+ * todo 获取wx代码
+ * @param {funStr} 转换方法名
+ */
+app.output = (inputPath = `${process.cwd()}/index.html`, funStr, outputPath = process.cwd()+"/build/pages/index/index.wxml")=>{;
+    new Promise((resolve, reject)=>{
+        fs.readFile(inputPath, (err, data)=>{
+            if(err) reject(err);
+            resolve(data.toString())
+        })
+    }).then((str)=>{    //转换
+        return new Promise((resolve, reject)=>{
+            eval(funStr)(str, (res)=>{   //调用package的方法 如：wx-get-wxml  名为=>  wxGetWxml
+                resolve(res)
+            })
+        })
+    }).then((res)=>{    //检查文件是否存在
+        return new Promise((resolve, reject)=>{
+            fs.ensureFile(outputPath, err=>{
+                if(err) reject(err);
+                resolve(res)
+            })
+        })
+    }).then((res)=>{   //输出
+        return new Promise((resolve, reject)=>{
+            fs.outputFile(outputPath, res, err=>{
+                if(err) reject(err);
+            })
+        })
+    }).catch((err)=>{
+        throw err;
+    })
+}
+
+
+/**
+ * @param {callback} 获取config回调
+ */
+app.getConfigJson = (callback)=>{
+    fs.readJson(`${process.cwd()}/cover.config.js`, (err, json) => {
+        if (err) console.error(err)
+        config = json   // todo 赋值到全局
+        callback()
+    })
+}
+
+/**
+ * todo "编译", 文件输出
+ */
+app.compile = ()=>{
+    app.getConfigJson(()=>{
+        let output_format = {};
+        for(let i=0;i<config.output_format.length;i++){
+            output_format = app.compile_fun[config.input_format][config.output_format[i]];  //传递
+            app.output( undefined, output_format['html'], undefined )  //输出html
+        }
+    })
+    
+}
+
+
+
+
 /**
  * ? 逻辑逻辑！！！
  * * init操作方法
@@ -53,6 +133,11 @@ app.createfolderfun = {
         fs.outputJson(`./${c_operation.name}/cover.config.js`, config, (err)=>{
             if(err) throw err;
         })
+
+        //*创建build文件夹
+        fs.ensureDir(`./${c_operation.name}/build/pages`, err=>{
+            if(err) throw err;
+        })
     },
     'h5': ()=>{   // * 创建h5入端开发模板
         fs.outputFile(`./${c_operation.name}/index.html`, template.h5.html,(err)=>{
@@ -66,9 +151,6 @@ app.createfolderfun = {
         })
         fs.copy(`${__dirname}/logo.png`, `./${c_operation.name}/images/logo.png`, err => {
             if(err) throw err;
-        }) 
-        fs.ensureFile(`./${c_operation.name}/build`,(err)=>{
-            if(err) throw err;
         })         
         app.createfolderfun['*']()
     }
@@ -76,7 +158,7 @@ app.createfolderfun = {
 
 
 /**
- * todo 根据c_operation渲染项目模板
+ * todo 根据c_operation渲染项目模板  生成cover.config.js
  */
 app.begin = ()=>{
     spinner.start();
@@ -99,52 +181,3 @@ app.begin = ()=>{
     app.createfolderfun[c_operation.input_format]()  // * 入端
 
 }
-
-
-/**
- * todo 获取wx代码
- */
-app.getCoverHtml = (strHtml, callback)=>{
-    wxGetWxml(strHtml, (res)=>{
-        callback(res)
-    })
-}
-
-/**
- * * 编译方法对象
- */
-app.compile_fun = {
-    'h5':{
-        'wxapp':{
-            html: 'wxGetWxml'
-        },
-        'react':{
-            html: 'reactGetHtml'   // ! demodemo   react vue 都是不需要的， h5\wxapp\hybrid是目前的输出选型
-        }
-    }
-}
-
-/**
- * @param {callback} 获取config回调
- */
-app.getConfigJson = (callback)=>{
-    fs.readJson('./cover.config.js', (err, json) => {
-        if (err) console.error(err)
-        config = json   // todo 赋值到全局
-        callback()
-    })
-}
-
-/**
- * todo "编译", 文件输出
- */
-app.compile = ()=>{
-    app.getConfigJson(()=>{
-        console.log(app.compile_fun, config)
-        for(let i=0;i<config.output_format.length;i++){
-            console.log(app.compile_fun[config.input_format][config.output_format[i]]['html'])  // ! demodemodemo
-        }
-    })
-    
-}
-

@@ -27,6 +27,9 @@ module.exports = {
     }, //等等
     'p': {
         tagName: "text"
+    },
+    'script': {
+        tagName: "view"
     }
 
 }

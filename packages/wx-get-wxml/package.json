@@ -1,6 +1,6 @@
 {
   "name": "wx-get-wxml",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "由cover-html输出wxml",
   "main": "index.js",
   "scripts": {

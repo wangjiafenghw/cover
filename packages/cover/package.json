@@ -26,9 +26,9 @@
   "dependencies": {
     "chalk": "^2.4.1",
     "commander": "^2.19.0",
-    "fs-extra": "^7.0.0",
+    "fs-extra": "^7.0.1",
     "inquirer": "^6.2.0",
     "ora": "^3.0.0",
-    "wx-get-wxml": "0.0.1"
+    "wx-get-wxml": "~0.0.2"
   }
 }
