@@ -9,7 +9,7 @@ const spinner = {
     init: ora('创建工程...'),  // * loading动画
     build: ora('编译...')  // * 编译
 }
-const wxGetWxml = require('wx-get-wxml');
+const wxGetWxml = require('../wx-get-wxml/index');
 
 let cover = {};    //保存cover值
 let config = {};   //配置信息
