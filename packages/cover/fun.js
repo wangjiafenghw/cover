@@ -5,7 +5,10 @@ const path = require('path')
 let rootName = path.basename(process.cwd())  // * 默认项目名为根目录
 const c_operation = {}; // * 建立项目用户交互结果对象
 const template = require("./template")   // * 工程文件模板内容
-const spinner = ora('创建工程...');  // * loading动画
+const spinner = {
+    init: ora('创建工程...'),  // * loading动画
+    build: ora('编译...')  // * 编译
+}
 const wxGetWxml = require('wx-get-wxml');
 
 let cover = {};    //保存cover值
@@ -80,14 +83,15 @@ app.getConfigJson = (callback)=>{
  * todo "编译", 文件输出
  */
 app.compile = ()=>{
+    spinner.build.start();
     app.getConfigJson(()=>{
         let output_format = {};
         for(let i=0;i<config.output_format.length;i++){
             output_format = app.compile_fun[config.input_format][config.output_format[i]];  //传递
-            app.output( undefined, output_format['html'], undefined )  //输出html
+            app.output( `${process.cwd()}/index.html`, output_format['html'], process.cwd()+"/build/pages/index/index.wxml" )  //输出html
         }
+        spinner.build.succeed();
     })
-    
 }
 
 
@@ -125,7 +129,7 @@ app.createfolderfun = {
         fs.outputFile(`./${c_operation.name}/package.json`, c_operation.package, err => {
             if(err) throw err
             setTimeout(()=>{   // ? 输出太快有点low，这样逼格高一些
-                spinner.succeed()
+                spinner.init.succeed()
             }, 2000)
         })
         // * 创建cover.config.js
@@ -161,7 +165,7 @@ app.createfolderfun = {
  * todo 根据c_operation渲染项目模板  生成cover.config.js
  */
 app.begin = ()=>{
-    spinner.start();
+    spinner.init.start();
         // ? package.json
         c_operation.package = `
 {
@@ -171,6 +175,7 @@ app.begin = ()=>{
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
+        "build": "cover-generator build"
     },
     "keywords": [],
     "author": {},
