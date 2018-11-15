@@ -23,7 +23,8 @@ module.exports =  app = {};  // * 命令相应操作方法对象
 app.compile_fun = {
     'h5':{
         'wxapp':{
-            html: 'wxGetWxml'
+            html: 'wxGetWxml',
+            style: 'wxGetWxss'
         },
         'react':{
             html: 'reactGetHtml'   // ! demodemo   react vue 都是不需要的， h5\wxapp\hybrid是目前的输出选型
