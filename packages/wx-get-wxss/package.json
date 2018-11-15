@@ -1,0 +1,25 @@
+{
+  "name": "wx-get-wxss",
+  "version": "0.0.1",
+  "description": "cover编译wxss文件",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cover",
+    "wxss",
+    "style",
+    "wxapp"
+  ],
+  "author": {
+    "name": "Wang Jiafeng",
+    "email": "wang_jiafeng@yahoo.com",
+    "url": "https://yellowfox.cn/"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "cover-get-dom-node-by-tagname": "^1.0.1",
+    "fs-extra": "^7.0.1"
+  }
+}
