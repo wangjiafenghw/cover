@@ -137,7 +137,7 @@ app.createfolderfun = {
                 spinner.init.succeed()
             }, 2000)
         })
-        // * 创建cover.config.js
+        // * 创建cover.config.json
         let config = {'input_format': c_operation.input_format, 'output_format': c_operation.output_format}
         fs.outputJson(`./${c_operation.name}/cover.config.json`, config, (err)=>{
             if(err) throw err;

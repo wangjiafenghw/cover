@@ -26,5 +26,7 @@ function main(htmlStr){
     })
     cgdnbt(htmlStr, 'body', (data)=>{
         console.log('bady=====>\n', data)
+
+        fs.writeFile('./test.wxml', JSON.stringify(data))
     })
 }
