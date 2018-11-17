@@ -9,7 +9,9 @@ const spinner = {
     init: ora('创建工程...'),  // * loading动画
     build: ora('编译...')  // * 编译
 }
+//  方法引入
 const wxGetWxml = require('../wx-get-wxml/index');
+const wxGetWxss = require('../wx-get-wxss/index');
 
 let cover = {};    //保存cover值
 let config = {};   //配置信息
@@ -37,8 +39,10 @@ app.compile_fun = {
  * 
  * todo 获取wx代码
  * @param {funStr} 转换方法名
+ * @param {inputPath} 源代码文件路径
+ * @param {outputPath} 编译输出文件路径
  */
-app.output = (inputPath = `${process.cwd()}/index.html`, funStr, outputPath = process.cwd()+"/build/pages/index/index.wxml")=>{;
+app.output = (inputPath, funStr, outputPath)=>{;
     new Promise((resolve, reject)=>{
         fs.readFile(inputPath, (err, data)=>{
             if(err) reject(err);
@@ -89,13 +93,13 @@ app.compile = ()=>{
         let output_format = {};
         for(let i=0;i<config.output_format.length;i++){
             output_format = app.compile_fun[config.input_format][config.output_format[i]];  //传递
-            app.output( `${process.cwd()}/index.html`, output_format['html'], process.cwd()+"/build/pages/index/index.wxml" )  //输出html
+            let platform = config.output_format[i];
+            app.output( `${process.cwd()}/index.html`, output_format['html'], `${process.cwd()}/build/${platform}/pages/index/index.wxml` )  //输出html
+            
         }
         spinner.build.succeed();
     })
 }
-
-
 
 
 /**
