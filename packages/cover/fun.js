@@ -77,7 +77,7 @@ app.output = (inputPath, funStr, outputPath)=>{;
  * @param {callback} 获取config回调
  */
 app.getConfigJson = (callback)=>{
-    fs.readJson(`${process.cwd()}/cover.config.js`, (err, json) => {
+    fs.readJson(`${process.cwd()}/cover.config.json`, (err, json) => {
         if (err) console.error(err)
         config = json   // todo 赋值到全局
         callback()
@@ -139,7 +139,7 @@ app.createfolderfun = {
         })
         // * 创建cover.config.js
         let config = {'input_format': c_operation.input_format, 'output_format': c_operation.output_format}
-        fs.outputJson(`./${c_operation.name}/cover.config.js`, config, (err)=>{
+        fs.outputJson(`./${c_operation.name}/cover.config.json`, config, (err)=>{
             if(err) throw err;
         })
 
