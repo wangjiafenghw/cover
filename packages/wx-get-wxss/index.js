@@ -1,8 +1,8 @@
 const cgdnbt = require("cover-get-dom-node-by-tagname")
 const fs = require('fs-extra')
-const def_wxss = require('./wx_def_ss.config')  //h5标签默认样式
+const _def_wxss = require('./wx_def_ss.config')  //h5标签默认样式
 
-module.exports = {main, def_wxss = def_wxss.main};
+module.exports = {main, def_wxss: _def_wxss.main};
 let style = {};
 
 
