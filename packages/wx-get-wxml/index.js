@@ -12,12 +12,12 @@ module.exports = main
  * @param[可选] {String} item_key 对象元素的键名
  */
 Object.prototype.hasKeyofArrayObj = (array, key, item_key="key")=>{
-    let r = array.filter(item=>item[item_key]===key)
-    if(!!r.length){
-        return true;
-    }else{
-        return false;
+    for(let i=0;i<array.length;i++){
+        if(array[i][item_key]===key){
+            return true;
+        }
     }
+    return false;
 }
 
 /**
