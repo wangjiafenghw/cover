@@ -1,1 +1,1 @@
-<view class="cv-div" ><image class="cv-img"  /><text class="cv-p" >Welcome <text class="cv-span" >Cover.js</text></text></view>
+<view class="cv-div" class= "wrap"><image class="cv-img" url="./images/logo.png"alt= "" /><text class="cv-p" >Welcome <text class="cv-span" >Cover.js</text></text></view>

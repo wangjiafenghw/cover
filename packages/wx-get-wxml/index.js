@@ -12,9 +12,17 @@ module.exports = main
 function _re_json_get_str(json) {
     json.forEach((item, index) => {
         if(item.type==="element"){  //*标签
-            let tagName, str, attribute;
+            let tagName, str, attributes = "", type = item.tagName;
             // todo 生成属性字符串
-            attribute = "";
+            item.attributes.forEach(item=>{
+                console.log(typeof wx_tag[type])
+                if(!Object.prototype.hasOwnProperty.call(wx_tag[type], item.key)){  //检测转换规则文件是否存在属性，没有就直接将源码写入
+                    attributes += `${item.key}= "${item.value}"`
+                }else{
+                    attributes += `${wx_tag[type][item.key]}="${item.value}"`
+                }
+                
+            })
             
             // todo 生成标签部分
             switch (wx_tag[item.tagName].type) {
@@ -24,13 +32,13 @@ function _re_json_get_str(json) {
                 case 1:
                     tagName = wx_tag[item.tagName].tagName;
                     // {item.tageName}>"cv-"+标签名>//*与标签名关联的类名
-                    // {attribute}>//*属性字符串
+                    // {attributes}>//*属性字符串
                     // {replaceMark}//*替换标识符
-                    str = `<${tagName} class="cv-${item.tagName}" ${attribute} />${replaceMark}`;
+                    str = `<${tagName} class="cv-${item.tagName}" ${attributes} />${replaceMark}`;
                     break;
                 case 2:
                     tagName = wx_tag[item.tagName].tagName;
-                    str = `<${tagName} class="cv-${item.tagName}" ${attribute}>${replaceMark}</${tagName}>${replaceMark}`;  // ? 获取wxml相应标签，mark占位
+                    str = `<${tagName} class="cv-${item.tagName}" ${attributes}>${replaceMark}</${tagName}>${replaceMark}`;  // ? 获取wxml相应标签，mark占位
                     break;
                 default:
                     break;
