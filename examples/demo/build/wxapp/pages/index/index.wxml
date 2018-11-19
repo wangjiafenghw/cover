@@ -1,8 +1,1 @@
-<view class="cv-div">
-    <image class="cv-img">
-        <text class="cv-p">Welcome</text>
-        <test class="cv-span">Cover.js</test>
-    </image>
-</view>
-<view class="cv-script"></view>
-@^cover^
+<view class="cv-div"><image class="cv-img"><text class="cv-p">Welcome </text><test class="cv-span">Cover.js</test></image></view><view class="cv-script"></view>@^cover^

@@ -11,7 +11,8 @@ const spinner = {
 }
 //  方法引入
 const wxGetWxml = require('../wx-get-wxml/index');
-const wxGetWxss = require('../wx-get-wxss/index');
+const wxGetWxss = require('../wx-get-wxss/index').main;
+const wxDefWxss = require('../wx-get-wxss/index').def_wxss;
 
 let cover = {};    //保存cover值
 let config = {};   //配置信息
@@ -78,7 +79,11 @@ app.output = (inputPath, funStr, outputPath)=>{;
  */
 app.getConfigJson = (callback)=>{
     fs.readJson(`${process.cwd()}/cover.config.json`, (err, json) => {
-        if (err) console.error(err)
+        if (err){
+            spinner.build.fail()
+            console.log(`\nYou Can Try Use "cd <Tab> && <Enter>" To Solve This Trouble！\n\n`)
+            throw err;
+        }
         config = json   // todo 赋值到全局
         callback()
     })
@@ -127,11 +132,12 @@ app.init = (name)=>{
 
 /**
  * * 根据预设的入端代码结构初始化项目文件结构方法的对象
+ * 
  */
 app.createfolderfun = {
-    '*': ()=>{  
+    '*': (path)=>{  
         // * 创建package.json
-        fs.outputFile(`./${c_operation.name}/package.json`, c_operation.package, err => {
+        fs.outputFile(`${path}/package.json`, c_operation.package, err => {
             if(err) throw err
             setTimeout(()=>{   // ? 输出太快有点low，这样逼格高一些
                 spinner.init.succeed()
@@ -139,29 +145,33 @@ app.createfolderfun = {
         })
         // * 创建cover.config.json
         let config = {'input_format': c_operation.input_format, 'output_format': c_operation.output_format}
-        fs.outputJson(`./${c_operation.name}/cover.config.json`, config, (err)=>{
+        fs.outputJson(`${path}/cover.config.json`, config, (err)=>{
             if(err) throw err;
         })
-
         //*创建build文件夹
-        fs.ensureDir(`./${c_operation.name}/build/pages`, err=>{
+        fs.ensureDir(`${path}/build`, err=>{
             if(err) throw err;
         })
     },
-    'h5': ()=>{   // * 创建h5入端开发模板
-        fs.outputFile(`./${c_operation.name}/index.html`, template.h5.html,(err)=>{
+    'h5': (path)=>{   // * 创建h5入端开发模板
+        fs.outputFile(`${path}/index.html`, template.h5.html,(err)=>{
             if(err) throw err;
         })
-        fs.outputFile(`./${c_operation.name}/style/style.css`, template.h5.style,(err)=>{
+        fs.outputFile(`${path}/style/style.css`, template.h5.style,(err)=>{
             if(err) throw err;
         })
-        fs.outputFile(`./${c_operation.name}/js/index.js`, template.h5.script,(err)=>{
+        fs.outputFile(`${path}/js/index.js`, template.h5.script,(err)=>{
             if(err) throw err;
         })
-        fs.copy(`${__dirname}/logo.png`, `./${c_operation.name}/images/logo.png`, err => {
+        fs.copy(`${__dirname}/logo.png`, `${path}/images/logo.png`, err => {
             if(err) throw err;
         })         
-        app.createfolderfun['*']()
+        app.createfolderfun['*'](path)
+    },
+    'wxapp': (path)=>{
+        fs.outputFile(`${path}/app.wxss`, wxDefWxss, err=>{
+            if(err) throw err;
+        })
     }
 }
 
@@ -188,6 +198,14 @@ app.begin = ()=>{
 }`;
 
 
-    app.createfolderfun[c_operation.input_format]()  // * 入端
-
+    app.createfolderfun[c_operation.input_format](`./${c_operation.name}`)  // * 入端
+    // todo 测试输出  ----------------
+    // fs.outputFile(`./${c_operation.name}/demo_c_operation.js`, JSON.stringify(c_operation), (err)=>{
+    //     if(err) throw err;
+    // })
+    // todo END -----------------
+    // * 输出端
+    c_operation.output_format.forEach(item => {
+        app.createfolderfun[item](`./${c_operation.name}/build/${item}`)
+    });
 }
