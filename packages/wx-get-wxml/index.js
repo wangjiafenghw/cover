@@ -4,6 +4,22 @@ let wxHtml = replaceMark; //*特殊字符串用于替换，并尽量避免与源
 const wx_tag = require("./wx_tag.config")
 
 module.exports = main
+
+/**
+ * todo 判断数组中是否存在键名为key的对象
+ * @param {Array} array 待测数组
+ * @param {String} key 键名
+ * @param[可选] {String} item_key 对象元素的键名
+ */
+Object.prototype.hasKeyofArrayObj = (array, key, item_key="key")=>{
+    let r = array.filter(item=>item[item_key]===key)
+    if(!!r.length){
+        return true;
+    }else{
+        return false;
+    }
+}
+
 /**
  * * 用递归深度优先遍历能不能行，试试再说，用replaceMrak占位替换的方式
  * TODO 获取wxml标准的字符串
@@ -14,12 +30,22 @@ function _re_json_get_str(json) {
         if(item.type==="element"){  //*标签
             let tagName, str, attributes = "", type = item.tagName;
             // todo 生成属性字符串
+            if(!Object.prototype.hasKeyofArrayObj.call(this, item.attributes, "class")){
+                attributes += `class="cv-${type}"`
+            }
             item.attributes.forEach(item=>{
-                console.log(typeof wx_tag[type])
                 if(!Object.prototype.hasOwnProperty.call(wx_tag[type], item.key)){  //检测转换规则文件是否存在属性，没有就直接将源码写入
                     attributes += `${item.key}= "${item.value}"`
                 }else{
-                    attributes += `${wx_tag[type][item.key]}="${item.value}"`
+                    switch (wx_tag[type][item.key]) {
+                        case "class":
+                            attributes += `${wx_tag[type][item.key]}="cv-${type} ${item.value}"`
+                            break;
+                    
+                        default:
+                            attributes += `${wx_tag[type][item.key]}="${item.value}"`
+                            break;
+                    }
                 }
                 
             })
@@ -34,11 +60,11 @@ function _re_json_get_str(json) {
                     // {item.tageName}>"cv-"+标签名>//*与标签名关联的类名
                     // {attributes}>//*属性字符串
                     // {replaceMark}//*替换标识符
-                    str = `<${tagName} class="cv-${item.tagName}" ${attributes} />${replaceMark}`;
+                    str = `<${tagName} ${attributes} />${replaceMark}`;
                     break;
                 case 2:
                     tagName = wx_tag[item.tagName].tagName;
-                    str = `<${tagName} class="cv-${item.tagName}" ${attributes}>${replaceMark}</${tagName}>${replaceMark}`;  // ? 获取wxml相应标签，mark占位
+                    str = `<${tagName} ${attributes}>${replaceMark}</${tagName}>${replaceMark}`;  // ? 获取wxml相应标签，mark占位
                     break;
                 default:
                     break;

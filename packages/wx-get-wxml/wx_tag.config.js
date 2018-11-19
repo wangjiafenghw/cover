@@ -5,23 +5,28 @@
 module.exports = { 
     'div': {
         tagName: "view",
-        type: 2
+        type: 2,
+        class: "class"
     },
     'h1': {
         tagName: "text",
-        type: 2
+        type: 2,
+        class: "class"
     },
     'h2': {
         tagName: "text",
-        type: 2
+        type: 2,
+        class: "class"
     },
     'p': {
         tagName: "text",
-        type: 2
+        type: 2,
+        class: "class"
     },
     'span': {
         tagName: "text",
-        type: 2
+        type: 2,
+        class: "class"
     },
     'script': {
         tagName: "view",
