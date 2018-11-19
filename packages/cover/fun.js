@@ -94,11 +94,16 @@ app.getConfigJson = (callback)=>{
  */
 app.compile = ()=>{
     spinner.build.start();
+    
     app.getConfigJson(()=>{
         let output_format = {};
         for(let i=0;i<config.output_format.length;i++){
             output_format = app.compile_fun[config.input_format][config.output_format[i]];  //传递
-            let platform = config.output_format[i];
+            let platform = config.output_format[i];  //*当前输出的平台
+            //*静态资源复制到项目
+            fs.copy("./images", `./build/${platform}/images`)
+
+            //*代码编译输出
             app.output( `${process.cwd()}/index.html`, output_format['html'], `${process.cwd()}/build/${platform}/pages/index/index.wxml` )  //输出html
             
         }

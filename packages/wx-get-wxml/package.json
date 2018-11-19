@@ -18,6 +18,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "cover-get-dom-node-by-tagname": "^1.0.1"
+    "cover-get-dom-node-by-tagname": "^1.0.1",
+    "fs-extra": "^7.0.1"
   }
 }
