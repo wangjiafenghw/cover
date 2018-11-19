@@ -11,18 +11,32 @@ module.exports = main
  */
 function _re_json_get_str(json) {
     json.forEach((item, index) => {
-        if(item.type==="element"){
-            let tagName = wx_tag[item.tagName].tagName;
-            let str = `<${tagName} class="cv-${item.tagName}">${replaceMark}</${tagName}>${replaceMark}`  //获取wxml相应标签，mark占位
+        if(item.type==="element"){  //*标签
+            let tagName, str;
+            switch (wx_tag[item.tagName].type) {
+                case 0:
+                    str = "";
+                    break;
+                case 1:
+                    tagName = wx_tag[item.tagName].tagName;
+                    str = `<${tagName} class="cv-${item.tagName}" />${replaceMark}`;
+                    break;
+                case 2:
+                    tagName = wx_tag[item.tagName].tagName;
+                    str = `<${tagName} class="cv-${item.tagName}">${replaceMark}</${tagName}>${replaceMark}`;  // ? 获取wxml相应标签，mark占位
+                    break;
+                default:
+                    break;
+            }
+            // todo 替换操作
             wxHtml = wxHtml.replace(replaceMark, str)
             _re_json_get_str(item.children)
             if(index===json.length-1){    //不再有兄弟节点，去除replaceMark
                 wxHtml = wxHtml.replace(replaceMark, "")
             }
-        }else if(item.type==="text"){
-            wxHtml = wxHtml.replace(replaceMark, item.content)
+        }else if(item.type==="text"){   //*文本
+            wxHtml = wxHtml.replace(replaceMark, item.content+replaceMark)
         }
-        
         
     });
 }

@@ -20,7 +20,7 @@ module.exports = {
         type: 2
     },
     'span': {
-        tagName: "test",
+        tagName: "text",
         type: 2
     },
     'script': {
